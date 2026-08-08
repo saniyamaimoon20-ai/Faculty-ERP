@@ -25,7 +25,7 @@ def create_app():
     db.init_app(app)
     
     # Enable CORS for React frontend (port 5173 / localhost)
-    CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173"])
+    CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://faculink-erp-ssmiet.vercel.app", "https://faculink-erp-ssmiet-git-main-srnr.vercel.app", "https://faculink-erp-ssmiet-1c56m7cup-srnr.vercel.app"])
 
     # Setup Flask-Login
     login_manager = LoginManager()
