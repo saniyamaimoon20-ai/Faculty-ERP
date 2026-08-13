@@ -10,7 +10,7 @@ def seed_database():
     try:
         with db.engine.connect() as conn:
             from sqlalchemy import text
-            result = conn.execute(text("PRAGMA table_info(faculty)")).fetchall()
+            result = inspect(db.engine).get_columns('faculty').fetchall()
             cols = [r[1] for r in result] if result else []
             if cols and 'attendance_status' not in cols:
                 conn.execute(text("ALTER TABLE faculty ADD COLUMN attendance_status VARCHAR(20) DEFAULT 'Present'"))
