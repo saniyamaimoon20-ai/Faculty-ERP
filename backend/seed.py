@@ -9,9 +9,9 @@ def seed_database():
     # Schema migration safeguard for SQLite
     try:
         with db.engine.connect() as conn:
-            from sqlalchemy import text
-            result = inspect(db.engine).get_columns('faculty').fetchall()
-            cols = [r[1] for r in result] if result else []
+            from sqlalchemy import inspect, text
+            result = inspect(conn).get_columns('faculty')
+            cols = [column['name'] for column in result]
             if cols and 'attendance_status' not in cols:
                 conn.execute(text("ALTER TABLE faculty ADD COLUMN attendance_status VARCHAR(20) DEFAULT 'Present'"))
                 conn.commit()
